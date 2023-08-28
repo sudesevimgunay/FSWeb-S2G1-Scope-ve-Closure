@@ -178,35 +178,31 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(periyotSkoru,takimSkoru,ceyrekSayısı) {
+function skorTabelasi(periyotSkoru,takimSkoru,ceyrekSayısı){
   
-  let evSahibiTakımSkoru =takimSkoru();
-  let konukTakımSkoru=takimSkoru();
-  for(let i=0; i<ceyrekSayısı;i++){
-    evSahibiTakımSkoru =takimSkoru();
-   konukTakımSkoru=takimSkoru();
+  let periyotSonucu=[];
+  let evSahibiTakımSkoru=0;
+  let konukTakımSkoru=0;
 
-   console.log("ev sahibi takım :", evSahibiTakımSkoru)
-   console.log("konuk takım ", konukTakımSkoru)
+  for(let i=0; i<ceyrekSayısı; i++){
+    const skor=periyotSkoru(takimSkoru);
+    evSahibiTakımSkoru=evSahibiTakımSkoru+skor.EvSahibi;
+    konukTakımSkoru=konukTakımSkoru+skor.KonukTakim;
+    const periyotDegeri=`${i+1}. Periyot: Ev Sahibi ${skor.EvSahibi} - Konuk Takım ${skor.KonukTakim}`;
+    periyotSonucu.push(periyotDegeri);
+    
+  }
+  if(evSahibiTakımSkoru===konukTakımSkoru){
 
-
+  }else {
+    const macSonucu=`Maç sonucu :Ev Sahibi ${evSahibiTakımSkoru} - Konuk Takım ${konukTakımSkoru}`;
+    periyotSonucu.push(macSonucu);
   }
   
-  return {EvSahibi:evSahibiTakımSkoru,
-          KonukTakim:konukTakımSkoru,       
-         }
-  
-
-    
-
-
-
-    
-
-  
+  console.log("periyot sonucu:", periyotSonucu);
+  return periyotSonucu ;
 }
-
-console.log("Görev->5",skorTabelasi(periyotSkoru,takimSkoru,4))
+console.log("Görev 5->",skorTabelasi(periyotSkoru,takimSkoru,4))
 
 
 
