@@ -30,10 +30,17 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
+  skor 1 = skorArtirici()olduğu için skor 1'i öğrenmek için skorGuncelle kodunu çalıştırmamız gerekir.
+  Bu kodu her çalıştırdığımızda let skor=0 tanımını fonksiyonun içinde bulunduğu için her seferinde 0'dan başlar.
+
+  skor 2 kodunda let skor=0 tanımlaması fonskiyon dışında yapıldığından ilk değeri 0 olarak alır ve fonksiyon içine girdiğinde +1 olarak yaparak devam eder.
+  fonksiyonu kaç kere çalıştırırsak o kadar kere artarak dönüş olur.
   
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
+ Her seferinde oluşan değeri hafızada tuttuğu için  skor 2 de closure kullanmaktadır.
   
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+  0'dan başlamasını istediğimiz durumlarda skor 1, aratarak devam etmesini istediğimiz durumlarda skor 2 kullanılmalıdır.
 */
 
 // skor1 kodları
@@ -64,10 +71,14 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
-}
+function takimSkoru(){
+  const skor=Math.floor(Math.random()*(25 - 10 +1))+10;
 
+   
+
+    return skor
+}
+console.log("Takim skoru : ",takimSkoru()) 
 
 
 
@@ -86,11 +97,26 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(takimSkoru,ceyrekSayısı){
+
+  let evSahibiTakımSkoru=0;
+  let konukTakımSkoru=0;
+    
+    for (let i=0; i<ceyrekSayısı; i++){
+
+      evSahibiTakımSkoru=evSahibiTakımSkoru + takimSkoru();
+      konukTakımSkoru=konukTakımSkoru + takimSkoru();
+
+ 
+  }; 
+
+  return {EvSahibi : evSahibiTakımSkoru,
+           KonukTakim: konukTakımSkoru
 }
+  
+  }
 
-
+console.log("Görev 3 ->" ,macSonucu(takimSkoru, 4))
 
 
 
@@ -109,10 +135,16 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(takimSkoru) {
+  let evSahibiTakımSkoru =takimSkoru();
+  let konukTakımSkoru=takimSkoru();
+  
+  return {EvSahibi:evSahibiTakımSkoru,
+          KonukTakim:konukTakımSkoru,       
+         }
 
 }
+console.log("Görev 4 -> ",periyotSkoru(takimSkoru))
 
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
@@ -146,10 +178,35 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function skorTabelasi(periyotSkoru,takimSkoru,ceyrekSayısı) {
+  
+  let evSahibiTakımSkoru =takimSkoru();
+  let konukTakımSkoru=takimSkoru();
+  for(let i=0; i<ceyrekSayısı;i++){
+    evSahibiTakımSkoru =takimSkoru();
+   konukTakımSkoru=takimSkoru();
+
+   console.log("ev sahibi takım :", evSahibiTakımSkoru)
+   console.log("konuk takım ", konukTakımSkoru)
+
+
+  }
+  
+  return {EvSahibi:evSahibiTakımSkoru,
+          KonukTakim:konukTakımSkoru,       
+         }
+  
+
+    
+
+
+
+    
+
+  
 }
 
+console.log("Görev->5",skorTabelasi(periyotSkoru,takimSkoru,4))
 
 
 
